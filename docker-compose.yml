@@ -1,0 +1,20 @@
+version: "3.4"
+
+services:
+  localidade-db:
+    image: postgres:14.5
+    container_name: localidade-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=localidade
+    ports:
+      - 8090:5432
+    networks:
+      - project107-net
+
+networks:
+  project107-net:
+    name: project107-net
+    driver: bridge
