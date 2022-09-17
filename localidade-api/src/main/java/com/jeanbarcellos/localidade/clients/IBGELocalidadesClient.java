@@ -34,6 +34,10 @@ public interface IBGELocalidadesClient {
     public List<MunicipioResponse> obterMunicipiosPorEstadoId(@PathParam("id") String id);
 
     @GET
+    @Path("/municipios")
+    public List<MunicipioResponse> obterMunicipios(@DefaultValue("if") @QueryParam("orderBy") String orderBy);
+
+    @GET
     @Path("/municipios/{id}")
     public MunicipioResponse obterMunicipio(@PathParam String id);
 
