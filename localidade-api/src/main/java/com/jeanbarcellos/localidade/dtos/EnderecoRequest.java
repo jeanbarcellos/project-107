@@ -38,7 +38,7 @@ public class EnderecoRequest {
     private String bairro;
 
     @NotNull
-    @Schema(description = "ID/Còdigo do município segundo IBGE")
+    @Schema(description = "ID/Código do município segundo IBGE")
     private Long municipioId;
 
 }
