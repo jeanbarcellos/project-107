@@ -28,9 +28,9 @@ public class ViaCEPResource {
 
     @GET
     @Path("/{cep}")
-    public Response getCep(@PathParam String cep) {
+    public Response obterCep(@PathParam String cep) {
 
-        var response = this.client.getCep(cep);
+        var response = this.client.obterCep(cep);
 
         return Response.ok(response).build();
     }

@@ -13,6 +13,6 @@ public interface ViaCEPClient {
 
     @GET
     @Path("/{cep}/json")
-    public CEPResponse getCep(@PathParam String cep);
+    public CEPResponse obterCep(@PathParam String cep);
 
 }
