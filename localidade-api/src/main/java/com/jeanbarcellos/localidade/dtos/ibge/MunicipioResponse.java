@@ -19,4 +19,8 @@ public class MunicipioResponse {
     @JsonProperty("regiao-imediata")
     private RegiaoImediataResponse regiaoImediata;
 
+    public UFResponse getUF() {
+        return this.getMicrorregiao().getMesorregiao().getUf();
+    }
+
 }

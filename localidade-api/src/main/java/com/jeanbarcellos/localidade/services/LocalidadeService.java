@@ -13,16 +13,22 @@ import com.jeanbarcellos.localidade.clients.IBGELocalidadesClient;
 import com.jeanbarcellos.localidade.dtos.EstadoResponse;
 import com.jeanbarcellos.localidade.dtos.MunicipioResponse;
 import com.jeanbarcellos.localidade.dtos.ibge.UFResponse;
+import com.jeanbarcellos.localidade.entities.Estado;
 import com.jeanbarcellos.localidade.mapper.LocalidadeMapper;
 import com.jeanbarcellos.localidade.repositories.EstadoRepository;
 import com.jeanbarcellos.localidade.repositories.MunicipioRepository;
 
+import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.panache.common.Sort;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ApplicationScoped
 public class LocalidadeService {
+
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_NOME = "nome";
+    private static final String FIELD_ESTADO = "estado";
 
     @RestClient
     @Inject
@@ -37,7 +43,7 @@ public class LocalidadeService {
     // #region Estados
 
     public List<EstadoResponse> obterEstados() {
-        return EstadoResponse.of(this.estadoRepository.listAll(Sort.ascending("nome")));
+        return EstadoResponse.of(this.estadoRepository.listAll(Sort.ascending(FIELD_NOME)));
     }
 
     public EstadoResponse obterEstado(Long id) {
@@ -59,11 +65,13 @@ public class LocalidadeService {
     // #region Municípios
 
     public List<MunicipioResponse> obterMunicipios() {
-        return MunicipioResponse.of(this.municipioRepository.listAll(Sort.ascending("nome")));
+        return MunicipioResponse.of(this.municipioRepository.listAll(Sort.ascending(FIELD_NOME)));
     }
 
     public List<MunicipioResponse> obterMunicipiosPorEstado(Long estadoId) {
-        return MunicipioResponse.of(this.municipioRepository.findBy("estado", estadoId, Sort.ascending("nome")));
+        var municipio = this.municipioRepository.findBy(FIELD_ESTADO, Estado.of(estadoId), Sort.ascending(FIELD_NOME));
+
+        return MunicipioResponse.of(municipio);
     }
 
     public MunicipioResponse obterMunicipio(Long id) {
@@ -119,10 +127,10 @@ public class LocalidadeService {
         try {
             log.info("Sincronização dos Estados com o IBGE iniciada");
 
-            List<UFResponse> estadosClient = this.ibgeClient.obterEstados("nome");
+            List<UFResponse> estadosClient = this.ibgeClient.obterEstados(FIELD_NOME);
 
             for (UFResponse estadoClient : estadosClient) {
-                if (this.estadoRepository.existsBy("id", estadoClient.getId())) {
+                if (this.estadoRepository.existsBy(FIELD_ID, estadoClient.getId())) {
                     continue;
                 }
 
@@ -147,14 +155,17 @@ public class LocalidadeService {
         try {
             log.info("Sincronização dos Municipios com o IBGE iniciada");
 
-            var municipiosClient = this.ibgeClient.obterMunicipios("id");
+            var municipiosClient = this.ibgeClient.obterMunicipios(FIELD_ID);
 
             for (com.jeanbarcellos.localidade.dtos.ibge.MunicipioResponse municipioClient : municipiosClient) {
-                if (this.municipioRepository.existsBy("id", municipioClient.getId())) {
+                if (this.municipioRepository.existsBy(FIELD_ID, municipioClient.getId())) {
                     continue;
                 }
 
                 var municipio = LocalidadeMapper.toMunicipio(municipioClient);
+
+                var estado = this.estadoRepository.getReference(Estado.class, municipioClient.getUF().getId());
+                municipio.setEstado(estado);
 
                 this.municipioRepository.persist(municipio);
 

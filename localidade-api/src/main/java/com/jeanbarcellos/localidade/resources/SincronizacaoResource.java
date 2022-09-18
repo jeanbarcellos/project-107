@@ -34,7 +34,7 @@ public class SincronizacaoResource {
 
     @GET
     @Path("/municipio")
-    @Operation(summary = "Sincronizar estados com o IBGE", description = "Sincroniza a base local de municipios com o IBGE")
+    @Operation(summary = "Sincronizar municípios com o IBGE", description = "Sincroniza a base local de municipios com o IBGE")
     public Response sincronizarMunicipios() {
         this.service.sincronizarMunicipios();
         return Response.ok().build();

@@ -18,8 +18,6 @@ public class MunicipioResponse {
 
     private Long id;
 
-    private String sigla;
-
     private String nome;
 
     public static MunicipioResponse of(Municipio entity) {

@@ -31,4 +31,12 @@ public class Estado {
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    public Estado(Long id) {
+        this.id = id;
+    }
+
+    public static Estado of(Long id) {
+        return new Estado(id);
+    }
+
 }
