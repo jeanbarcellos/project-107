@@ -1,7 +1,5 @@
 package com.jeanbarcellos.core;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,10 +25,15 @@ public abstract class RepositoryBase<TEntity, TId>
     }
 
     public List<TEntity> findBy(String fieldName, Object value, Sort sort) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(fieldName, value);
+        return this.list(fieldName, sort, value);
+    }
 
-        return this.list(this.createQueryFromMap(params), sort);
+    public List<TEntity> findBy(Map<String, Object> params) {
+        return this.list(this.createQueryFromMap(params), params);
+    }
+
+    public List<TEntity> findBy(Map<String, Object> params, Sort sort) {
+        return this.list(this.createQueryFromMap(params), sort, params);
     }
 
     public <T extends Throwable> TEntity findByIdOrThrow(TId id,
@@ -41,11 +44,13 @@ public abstract class RepositoryBase<TEntity, TId>
     public TEntity findFirstBy(String fieldName, Object value) {
         var entities = this.findBy(fieldName, value);
 
-        if (entities.isEmpty()) {
-            return null;
-        }
+        return entities.isEmpty() ? null : entities.get(0);
+    }
 
-        return entities.get(0);
+    public TEntity findFirstBy(String fieldName, Object value, Sort sort) {
+        var entities = this.findBy(fieldName, value, sort);
+
+        return entities.isEmpty() ? null : entities.get(0);
     }
 
     public Optional<TEntity> findFirstByOptional(String fieldName, Object value) {
@@ -57,6 +62,10 @@ public abstract class RepositoryBase<TEntity, TId>
     public <T extends Throwable> TEntity findFirstByOrTrhow(String fieldName, Object value,
             Supplier<? extends T> exceptionSupplier) throws T {
         return this.findFirstByOptional(fieldName, value).orElseThrow(exceptionSupplier);
+    }
+
+    public TEntity getReference(Class<TEntity> entityClass, TId id) {
+        return this.getEntityManager().getReference(entityClass, id);
     }
 
     protected String createQueryFromMap(Map<String, Object> map) {
