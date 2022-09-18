@@ -16,7 +16,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import com.jeanbarcellos.localidade.services.LocalidadeService;
 
 @Path("/localidades")
-@Tag(name = "Localidade", description = "Manutenção de localidades do Brasil")
+@Tag(name = "Localidades", description = "Manutenção de localidades do Brasil")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped

@@ -16,8 +16,8 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import com.jeanbarcellos.localidade.dtos.EnderecoRequest;
 
-@Path("/endereco")
-@Tag(name = "Endereço", description = "Manutenção de endereços")
+@Path("/enderecos")
+@Tag(name = "Endereços", description = "Manutenção de endereços")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped

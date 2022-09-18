@@ -16,7 +16,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import com.jeanbarcellos.localidade.clients.IBGELocalidadesClient;
 
 @Path("/ibge/localidades")
-@Tag(name = "IBGE Localidades", description = "Acesso a API de Localidades do IBGE")
+@Tag(name = "Integração IBGE Localidades", description = "Acesso a API de Localidades do IBGE")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped

@@ -16,7 +16,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import com.jeanbarcellos.localidade.clients.ViaCEPClient;
 
 @Path("/viacep")
-@Tag(name = "Via CEP", description = "Acesso a API ViaCEP")
+@Tag(name = "Integração ViaCEP", description = "Acesso a API ViaCEP")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped

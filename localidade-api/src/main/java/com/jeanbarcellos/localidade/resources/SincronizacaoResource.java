@@ -14,8 +14,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import com.jeanbarcellos.localidade.services.LocalidadeService;
 
-@Path("/sync")
-@Tag(name = "Sincronização", description = "Atualiza a base local de localidades com o IBGE")
+@Path("/sincronizacao")
+@Tag(name = "Sincronização", description = "Sincronização da base local de localidades com o IBGE")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
@@ -33,7 +33,7 @@ public class SincronizacaoResource {
     }
 
     @GET
-    @Path("/municipio")
+    @Path("/municipios")
     @Operation(summary = "Sincronizar municípios com o IBGE", description = "Sincroniza a base local de municipios com o IBGE")
     public Response sincronizarMunicipios() {
         this.service.sincronizarMunicipios();
