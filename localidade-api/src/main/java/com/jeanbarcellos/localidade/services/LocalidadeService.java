@@ -18,13 +18,15 @@ import com.jeanbarcellos.localidade.mapper.LocalidadeMapper;
 import com.jeanbarcellos.localidade.repositories.EstadoRepository;
 import com.jeanbarcellos.localidade.repositories.MunicipioRepository;
 
-import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.panache.common.Sort;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ApplicationScoped
 public class LocalidadeService {
+
+    public static final String MSG_ERROR_ENTITY_NOT_FOUND_BY_ID = "%s não encontrado para o ID '%s' informado.";
+    public static final String MSG_ERROR_ENTITY_NOT_FOUND_BY_INITIALS = "Estado não encontrado a partir da sigla informada.";
 
     private static final String FIELD_ID = "id";
     private static final String FIELD_NOME = "nome";
@@ -48,14 +50,14 @@ public class LocalidadeService {
 
     public EstadoResponse obterEstado(Long id) {
         var estado = this.estadoRepository.findByIdOrThrow(id,
-                () -> new NotFoundException("Estado não encontrado a partir do ID informado"));
+                () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Estado", id)));
 
         return EstadoResponse.of(estado);
     }
 
     public EstadoResponse obterEstadoPorSigla(String sigla) {
         var estado = this.estadoRepository.findFirstByOrTrhow("sigla", sigla.toUpperCase(),
-                () -> new NotFoundException("Estado não encontrado a partir da sigla informada"));
+                () -> new NotFoundException(MSG_ERROR_ENTITY_NOT_FOUND_BY_INITIALS));
 
         return EstadoResponse.of(estado);
     }
@@ -76,7 +78,7 @@ public class LocalidadeService {
 
     public MunicipioResponse obterMunicipio(Long id) {
         var municipio = this.municipioRepository.findByIdOrThrow(id,
-                () -> new NotFoundException("Município não encontrado a partir do ID informado"));
+                () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Município", id)));
 
         return MunicipioResponse.of(municipio);
 
