@@ -36,4 +36,12 @@ public class Municipio {
     @JoinColumn(name = "estado_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "municipio_estado_id_fk"), nullable = false)
     private Estado estado;
 
+    public Municipio(Long id) {
+        this.id = id;
+    }
+
+    public static Municipio of(Long id) {
+        return new Municipio(id);
+    }
+
 }

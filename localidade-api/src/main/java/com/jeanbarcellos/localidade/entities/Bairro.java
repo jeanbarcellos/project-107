@@ -34,11 +34,18 @@ public class Bairro {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name = "descricao", nullable = false)
-    private String descricao;;
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "municipio_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "bairro_municipio_id_fk"), nullable = false)
     private Municipio municipio;
 
+    public Bairro(Long id) {
+        this.id = id;
+    }
+
+    public static Bairro of(Long id) {
+        return new Bairro(id);
+    }
 }

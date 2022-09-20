@@ -41,4 +41,12 @@ public class Logradouro {
     @JoinColumn(name = "municipio_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "logradouro_municipio_id_fk"), nullable = false)
     private Municipio municipio;
 
+    public Logradouro(Long id) {
+        this.id = id;
+    }
+
+    public static Logradouro of(Long id) {
+        return new Logradouro(id);
+    }
+
 }

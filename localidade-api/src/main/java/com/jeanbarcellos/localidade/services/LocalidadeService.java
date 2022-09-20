@@ -10,12 +10,17 @@ import javax.ws.rs.NotFoundException;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.jeanbarcellos.localidade.clients.IBGELocalidadesClient;
+import com.jeanbarcellos.localidade.dtos.BairroResponse;
 import com.jeanbarcellos.localidade.dtos.EstadoResponse;
+import com.jeanbarcellos.localidade.dtos.LogradouroResponse;
 import com.jeanbarcellos.localidade.dtos.MunicipioResponse;
 import com.jeanbarcellos.localidade.dtos.ibge.UFResponse;
 import com.jeanbarcellos.localidade.entities.Estado;
+import com.jeanbarcellos.localidade.entities.Municipio;
 import com.jeanbarcellos.localidade.mapper.LocalidadeMapper;
+import com.jeanbarcellos.localidade.repositories.BairroRepository;
 import com.jeanbarcellos.localidade.repositories.EstadoRepository;
+import com.jeanbarcellos.localidade.repositories.LogradouroRepository;
 import com.jeanbarcellos.localidade.repositories.MunicipioRepository;
 
 import io.quarkus.panache.common.Sort;
@@ -41,6 +46,12 @@ public class LocalidadeService {
 
     @Inject
     MunicipioRepository municipioRepository;
+
+    @Inject
+    BairroRepository bairroRepository;
+
+    @Inject
+    LogradouroRepository logradouroRepository;
 
     // #region Estados
 
@@ -88,15 +99,21 @@ public class LocalidadeService {
 
     // #region Bairros
 
-    public void obterBairros() {
-
+    public List<BairroResponse> obterBairros() {
+        return BairroResponse.of(this.bairroRepository.listAll(Sort.ascending(FIELD_NOME)));
     }
 
-    public void obterBairrosPorMunicipio(Long municipioId) {
+    public List<BairroResponse> obterBairrosPorMunicipio(Long municipioId) {
+        var bairro = this.bairroRepository.findBy(FIELD_ESTADO, Municipio.of(municipioId), Sort.ascending(FIELD_NOME));
 
+        return BairroResponse.of(bairro);
     }
 
-    public void obterBairroPorId(Long id) {
+    public BairroResponse obterBairro(Long id) {
+        var bairro = this.bairroRepository.findByIdOrThrow(id,
+                () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Bairro", id)));
+
+        return BairroResponse.of(bairro);
 
     }
 
@@ -104,19 +121,22 @@ public class LocalidadeService {
 
     // #region Logradouros
 
-    public void obterLogradouros() {
-
+    public List<LogradouroResponse> obterLogradouros() {
+        return LogradouroResponse.of(this.logradouroRepository.listAll(Sort.ascending(FIELD_NOME)));
     }
 
-    public void obterLogradourosPorBairro(Long bairroId) {
+    public List<LogradouroResponse> obterLogradourosPorMunicipio(Long municipioId) {
+        var logradouro = this.logradouroRepository.findBy(FIELD_ESTADO, Municipio.of(municipioId),
+                Sort.ascending(FIELD_NOME));
 
+        return LogradouroResponse.of(logradouro);
     }
 
-    public void obterLogradourosPorMunicipio(Long municipioId) {
+    public LogradouroResponse obterLogradouro(Long id) {
+        var logradouro = this.logradouroRepository.findByIdOrThrow(id,
+                () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Logradouro", id)));
 
-    }
-
-    public void obterLogradouroPorId(Long id) {
+        return LogradouroResponse.of(logradouro);
 
     }
 
