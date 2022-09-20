@@ -1,6 +1,7 @@
 package com.jeanbarcellos.localidade.resources;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,6 +16,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import com.jeanbarcellos.localidade.dtos.EnderecoRequest;
+import com.jeanbarcellos.localidade.services.EnderecoService;
 
 @Path("/enderecos")
 @Tag(name = "Endereços", description = "Manutenção de endereços")
@@ -23,9 +25,13 @@ import com.jeanbarcellos.localidade.dtos.EnderecoRequest;
 @RequestScoped
 public class EnderecoResource {
 
+    @Inject
+    EnderecoService service;
+
     @POST
     @Path("/")
     public Response salvar(@RequestBody EnderecoRequest request) {
+        service.salvar(request);
 
         return Response.ok().status(Status.CREATED).build();
     }
@@ -33,8 +39,7 @@ public class EnderecoResource {
     @GET
     @Path("/{id}")
     public Response obterPorId(@PathParam Long id) {
-
-        return Response.ok().build();
+        return Response.ok(service.obterPorId(id)).build();
     }
 
 }
