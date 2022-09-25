@@ -47,6 +47,13 @@ public class LocalidadeResource {
     }
 
     @GET
+    @Path("/estados/{id}/municipios")
+    @Operation(summary = "Obter todos municipios de um estado", description = "Retorna todos os municípios de um estado informado")
+    public Response obterMunicipioPorEstado(@PathParam("id") Long id) {
+        return Response.ok(this.service.obterMunicipiosPorEstado(id)).build();
+    }
+
+    @GET
     @Path("/municipios")
     @Operation(summary = "Obter municipios", description = "Retorna todos os municipios do Brasil por ordem alfabética")
     public Response obterMunicipios() {
@@ -61,10 +68,17 @@ public class LocalidadeResource {
     }
 
     @GET
-    @Path("/estados/{id}/municipios")
-    @Operation(summary = "Obter todos municipios de um estado", description = "Retorna todos os municípios de um estado informado")
-    public Response obterMunicipioPorEstado(@PathParam("id") Long id) {
-        return Response.ok(this.service.obterMunicipiosPorEstado(id)).build();
+    @Path("/municipios/{id}/bairros")
+    @Operation(summary = "Obter bairros de um municpioio", description = "Retorna todos os bairros de um municipio informado")
+    public Response obterBairrosPorMunicipioId(@PathParam("id") Long id) {
+        return Response.ok(this.service.obterBairrosPorMunicipio(id)).build();
+    }
+
+    @GET
+    @Path("/municipios/{id}/logradouros")
+    @Operation(summary = "Obter logradouros de um municpioio", description = "Retorna todos os logradouros de um municipio informado")
+    public Response obterLogradourosPorMunicipioId(@PathParam("id") Long id) {
+        return Response.ok(this.service.obterLogradourosPorMunicipio(id)).build();
     }
 
 }
