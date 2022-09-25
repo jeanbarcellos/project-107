@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -28,6 +29,7 @@ public class IBGELocalidadesResource {
 
     @GET
     @Path("/estados")
+    @Operation(summary = "Obter UFs", description = "Obtém o conjunto de Unidades da Federação do Brasil")
     public Response obterEstados() {
         var result = this.client.obterEstados("nome");
 
@@ -36,6 +38,7 @@ public class IBGELocalidadesResource {
 
     @GET
     @Path("/estados/{id}")
+    @Operation(summary = "Obter UFs por identificador", description = "Obtém o conjunto de Unidades da Federação do Brasil a partir do identificador")
     public Response obterEstado(@PathParam String id) {
 
         var result = this.client.obterEstado(id);
@@ -45,6 +48,7 @@ public class IBGELocalidadesResource {
 
     @GET
     @Path("/estados/{id}/municipios")
+    @Operation(summary = "Obter Municípios por UF", description = "Obtém o conjunto de municípios do Brasil a partir do identificador das Unidades da Federação")
     public Response obterEstadoPorMunicipio(@PathParam String id) {
 
         var result = this.client.obterMunicipiosPorEstadoId(id);
@@ -54,6 +58,7 @@ public class IBGELocalidadesResource {
 
     @GET
     @Path("/municipios/{id}")
+    @Operation(summary = "Obter Município por identificador", description = "Obtém o conjunto de municípios do Brasil a partir dos respectivos identificadores")
     public Response obterMunicipio(@PathParam String id) {
 
         var result = this.client.obterMunicipio(id);
