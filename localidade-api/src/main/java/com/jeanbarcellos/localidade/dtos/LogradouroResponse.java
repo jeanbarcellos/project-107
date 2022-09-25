@@ -25,7 +25,7 @@ public class LogradouroResponse {
     public static LogradouroResponse of(Logradouro entity) {
         return LogradouroResponse.builder()
                 .id(entity.getId())
-                .descricao(entity.getDescricao())
+                .nome(entity.getNome())
                 .build();
     }
 

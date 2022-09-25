@@ -36,6 +36,7 @@ public class LocalidadeService {
     private static final String FIELD_ID = "id";
     private static final String FIELD_NOME = "nome";
     private static final String FIELD_ESTADO = "estado";
+    private static final String FIELD_MUNICIPIO = "municipio";
 
     @RestClient
     @Inject
@@ -104,7 +105,8 @@ public class LocalidadeService {
     }
 
     public List<BairroResponse> obterBairrosPorMunicipio(Long municipioId) {
-        var bairro = this.bairroRepository.findBy(FIELD_ESTADO, Municipio.of(municipioId), Sort.ascending(FIELD_NOME));
+        var bairro = this.bairroRepository.findBy(FIELD_MUNICIPIO, Municipio.of(municipioId),
+                Sort.ascending(FIELD_NOME));
 
         return BairroResponse.of(bairro);
     }
@@ -126,7 +128,7 @@ public class LocalidadeService {
     }
 
     public List<LogradouroResponse> obterLogradourosPorMunicipio(Long municipioId) {
-        var logradouro = this.logradouroRepository.findBy(FIELD_ESTADO, Municipio.of(municipioId),
+        var logradouro = this.logradouroRepository.findBy(FIELD_MUNICIPIO, Municipio.of(municipioId),
                 Sort.ascending(FIELD_NOME));
 
         return LogradouroResponse.of(logradouro);
