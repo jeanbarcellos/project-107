@@ -34,8 +34,8 @@ public class Logradouro {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name = "descricao", nullable = false)
-    private String descricao;
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "municipio_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "logradouro_municipio_id_fk"), nullable = false)
@@ -43,6 +43,11 @@ public class Logradouro {
 
     public Logradouro(Long id) {
         this.id = id;
+    }
+
+    public Logradouro(Municipio municipio, String nome) {
+        this.municipio = municipio;
+        this.nome = nome;
     }
 
     public static Logradouro of(Long id) {

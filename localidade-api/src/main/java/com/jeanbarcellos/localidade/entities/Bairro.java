@@ -45,6 +45,11 @@ public class Bairro {
         this.id = id;
     }
 
+    public Bairro(Municipio municipio, String nome) {
+        this.municipio = municipio;
+        this.nome = nome;
+    }
+
     public static Bairro of(Long id) {
         return new Bairro(id);
     }
