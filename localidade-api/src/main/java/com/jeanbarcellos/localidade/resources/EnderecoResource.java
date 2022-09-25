@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -30,6 +31,7 @@ public class EnderecoResource {
 
     @POST
     @Path("/")
+    @Operation(summary = "Salvar endereco", description = "Salva um endereco")
     public Response salvar(@RequestBody EnderecoRequest request) {
         service.salvar(request);
 
@@ -38,8 +40,16 @@ public class EnderecoResource {
 
     @GET
     @Path("/{id}")
+    @Operation(summary = "Obter endereco por ID", description = "Retorna os detalhes de um endereço pelo seu ID")
     public Response obterPorId(@PathParam Long id) {
         return Response.ok(service.obterPorId(id)).build();
+    }
+
+    @GET
+    @Path("/")
+    @Operation(summary = "Obter enderecos", description = "Retorna todos os enderecos cadastrados")
+    public Response obterTodos() {
+        return Response.ok(service.obterEnderecos()).build();
     }
 
 }

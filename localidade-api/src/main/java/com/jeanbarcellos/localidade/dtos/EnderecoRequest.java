@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EnderecoRequest {
 
-    @JsonIgnore
+    // @JsonIgnore
     @Schema(description = "ID do endereço. Caso ainda não tenha informar null", defaultValue = "null")
     private Long id;
 

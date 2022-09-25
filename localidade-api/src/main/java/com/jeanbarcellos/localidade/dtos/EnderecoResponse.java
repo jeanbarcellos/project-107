@@ -1,5 +1,8 @@
 package com.jeanbarcellos.localidade.dtos;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.jeanbarcellos.localidade.entities.Endereco;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +39,10 @@ public class EnderecoResponse {
                 .logradouro(entity.getLogradouro())
                 .complemento(entity.getComplemento())
                 .build();
+    }
+
+    public static List<EnderecoResponse> of(List<Endereco> entities) {
+        return entities.stream().map(EnderecoResponse::of).collect(Collectors.toList());
     }
 
 }
