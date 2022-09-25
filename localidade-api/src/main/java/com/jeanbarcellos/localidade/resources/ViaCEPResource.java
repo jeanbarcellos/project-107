@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
@@ -28,6 +29,7 @@ public class ViaCEPResource {
 
     @GET
     @Path("/{cep}")
+    @Operation(summary = "Consulta de CEP", description = "Realiza a consulta de Códigos de Endereçamento Postal (CEP) do Brasil")
     public Response obterCep(@PathParam String cep) {
 
         var response = this.client.obterCep(cep);
