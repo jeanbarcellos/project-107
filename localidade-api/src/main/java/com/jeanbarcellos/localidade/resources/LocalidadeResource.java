@@ -69,14 +69,14 @@ public class LocalidadeResource {
 
     @GET
     @Path("/municipios/{id}/bairros")
-    @Operation(summary = "Obter bairros de um municpioio", description = "Retorna todos os bairros de um municipio informado")
+    @Operation(summary = "Obter bairros de um município", description = "Retorna todos os bairros de um municipio informado")
     public Response obterBairrosPorMunicipioId(@PathParam("id") Long id) {
         return Response.ok(this.service.obterBairrosPorMunicipio(id)).build();
     }
 
     @GET
     @Path("/municipios/{id}/logradouros")
-    @Operation(summary = "Obter logradouros de um municpioio", description = "Retorna todos os logradouros de um municipio informado")
+    @Operation(summary = "Obter logradouros de um município", description = "Retorna todos os logradouros de um municipio informado")
     public Response obterLogradourosPorMunicipioId(@PathParam("id") Long id) {
         return Response.ok(this.service.obterLogradourosPorMunicipio(id)).build();
     }

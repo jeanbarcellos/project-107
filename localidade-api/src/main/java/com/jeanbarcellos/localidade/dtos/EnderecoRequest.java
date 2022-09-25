@@ -7,8 +7,6 @@ import javax.validation.constraints.Size;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EnderecoRequest {
 
-    // @JsonIgnore
     @Schema(description = "ID do endereço. Caso ainda não tenha informar null", defaultValue = "null")
     private Long id;
 
