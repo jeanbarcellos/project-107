@@ -2,9 +2,7 @@ version: "3.4"
 
 services:
   localidade-db:
-    # image: postgres:14.5
-    image: project107/localidade-db
-    build: "./localidade-db"
+    image: postgres:14.5
     container_name: localidade-db
     restart: always
     environment:
@@ -18,15 +16,11 @@ services:
 
   localidade-api:
     image: project107/localidade-api
-    # build: "./localidade-api"
     container_name: localidade-api
     restart: always
-    depends_on:
-      - localidade-db
     environment:
       - DB_HOST=localidade-db
       - DB_PORT=5432
-      - DB_NAME=localidade
     ports:
       - 8091:8080
     networks:
@@ -36,3 +30,4 @@ networks:
   project107-net:
     name: project107-net
     driver: bridge
+    external: false
