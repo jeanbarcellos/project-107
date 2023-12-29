@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
-import com.jeanbarcellos.localidade.clients.IBGELocalidadesClient;
+import com.jeanbarcellos.localidade.clients.ibge.IBGELocalidadesClient;
 
 @Path("/ibge/localidades")
 @Tag(name = "Integração IBGE Localidades", description = "Acesso a API de Localidades do IBGE")

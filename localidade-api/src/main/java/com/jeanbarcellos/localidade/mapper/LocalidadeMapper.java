@@ -2,9 +2,9 @@ package com.jeanbarcellos.localidade.mapper;
 
 import java.util.function.LongFunction;
 
+import com.jeanbarcellos.localidade.clients.ibge.dtos.MunicipioResponse;
+import com.jeanbarcellos.localidade.clients.ibge.dtos.UFResponse;
 import com.jeanbarcellos.localidade.dtos.EnderecoRequest;
-import com.jeanbarcellos.localidade.dtos.ibge.MunicipioResponse;
-import com.jeanbarcellos.localidade.dtos.ibge.UFResponse;
 import com.jeanbarcellos.localidade.entities.Endereco;
 import com.jeanbarcellos.localidade.entities.Estado;
 import com.jeanbarcellos.localidade.entities.Municipio;

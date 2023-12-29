@@ -1,4 +1,4 @@
-package com.jeanbarcellos.localidade.dtos.ibge;
+package com.jeanbarcellos.localidade.clients.ibge.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,14 +7,13 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class RegiaoIntermediariaResponse {
+public class RegiaoImediataResponse {
 
     @EqualsAndHashCode.Include
     private Long id;
 
     private String nome;
 
-    @JsonProperty("UF")
-    private UFResponse uf;
-
+    @JsonProperty("regiao-intermediaria")
+    private RegiaoIntermediariaResponse regiaoIntermediaria;
 }

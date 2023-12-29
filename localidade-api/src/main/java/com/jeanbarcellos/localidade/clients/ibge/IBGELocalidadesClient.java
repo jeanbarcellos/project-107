@@ -1,4 +1,4 @@
-package com.jeanbarcellos.localidade.clients;
+package com.jeanbarcellos.localidade.clients.ibge;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
-import com.jeanbarcellos.localidade.dtos.ibge.MunicipioResponse;
-import com.jeanbarcellos.localidade.dtos.ibge.UFResponse;
+import com.jeanbarcellos.localidade.clients.ibge.dtos.MunicipioResponse;
+import com.jeanbarcellos.localidade.clients.ibge.dtos.UFResponse;
 
 @RegisterRestClient(configKey = "ibge-localidades-api")
 @Produces(MediaType.APPLICATION_JSON)

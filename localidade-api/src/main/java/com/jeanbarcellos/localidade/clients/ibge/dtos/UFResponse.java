@@ -1,4 +1,4 @@
-package com.jeanbarcellos.localidade.dtos.ibge;
+package com.jeanbarcellos.localidade.clients.ibge.dtos;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

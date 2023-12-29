@@ -9,12 +9,12 @@ import javax.ws.rs.NotFoundException;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import com.jeanbarcellos.localidade.clients.IBGELocalidadesClient;
+import com.jeanbarcellos.localidade.clients.ibge.IBGELocalidadesClient;
+import com.jeanbarcellos.localidade.clients.ibge.dtos.UFResponse;
 import com.jeanbarcellos.localidade.dtos.BairroResponse;
 import com.jeanbarcellos.localidade.dtos.EstadoResponse;
 import com.jeanbarcellos.localidade.dtos.LogradouroResponse;
 import com.jeanbarcellos.localidade.dtos.MunicipioResponse;
-import com.jeanbarcellos.localidade.dtos.ibge.UFResponse;
 import com.jeanbarcellos.localidade.entities.Estado;
 import com.jeanbarcellos.localidade.entities.Municipio;
 import com.jeanbarcellos.localidade.mapper.LocalidadeMapper;
@@ -179,7 +179,7 @@ public class LocalidadeService {
 
             var municipiosClient = this.ibgeClient.obterMunicipios(FIELD_ID);
 
-            for (com.jeanbarcellos.localidade.dtos.ibge.MunicipioResponse municipioClient : municipiosClient) {
+            for (com.jeanbarcellos.localidade.clients.ibge.dtos.MunicipioResponse municipioClient : municipiosClient) {
                 if (this.municipioRepository.existsBy(FIELD_ID, municipioClient.getId())) {
                     continue;
                 }

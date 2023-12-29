@@ -1,4 +1,4 @@
-package com.jeanbarcellos.localidade.clients;
+package com.jeanbarcellos.localidade.clients.viacep;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
-import com.jeanbarcellos.localidade.dtos.viacep.CEPResponse;
+import com.jeanbarcellos.localidade.clients.viacep.dtos.CEPResponse;
 
 @RegisterRestClient(configKey = "viacep-api")
 public interface ViaCEPClient {

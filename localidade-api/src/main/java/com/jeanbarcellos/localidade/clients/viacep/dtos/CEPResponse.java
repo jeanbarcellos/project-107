@@ -1,4 +1,4 @@
-package com.jeanbarcellos.localidade.dtos.viacep;
+package com.jeanbarcellos.localidade.clients.viacep.dtos;
 
 import org.apache.commons.lang3.StringUtils;
 
