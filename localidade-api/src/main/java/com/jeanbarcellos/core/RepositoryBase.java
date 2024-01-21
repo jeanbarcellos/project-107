@@ -53,7 +53,7 @@ public abstract class RepositoryBase<TEntity, TId>
         return entities.isEmpty() ? null : entities.get(0);
     }
 
-    public Optional<TEntity> findFirstByOptional(String fieldName, Object value) {
+    public Optional<TEntity> findFirstByAsOptional(String fieldName, Object value) {
         var entity = this.findFirstBy(fieldName, value);
 
         return entity == null ? Optional.empty() : Optional.of(entity);
@@ -61,7 +61,7 @@ public abstract class RepositoryBase<TEntity, TId>
 
     public <T extends Throwable> TEntity findFirstByOrTrhow(String fieldName, Object value,
             Supplier<? extends T> exceptionSupplier) throws T {
-        return this.findFirstByOptional(fieldName, value).orElseThrow(exceptionSupplier);
+        return this.findFirstByAsOptional(fieldName, value).orElseThrow(exceptionSupplier);
     }
 
     public TEntity getReference(Class<TEntity> entityClass, TId id) {
