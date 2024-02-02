@@ -7,7 +7,7 @@ import javax.ws.rs.NotFoundException;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.jeanbarcellos.core.Validator;
+import com.jeanbarcellos.core.validation.Validator;
 import com.jeanbarcellos.localidade.dtos.EnderecoRequest;
 import com.jeanbarcellos.localidade.dtos.EnderecoResponse;
 import com.jeanbarcellos.localidade.entities.Endereco;
