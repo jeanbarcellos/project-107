@@ -9,6 +9,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MunicipioResponse {
 
+    public static final String LABEL_ID = "id";
+    public static final String LABEL_NOME = "nome";
+
     @EqualsAndHashCode.Include
     private Long id;
 

@@ -24,12 +24,11 @@ public class ViaCEPResource {
 
     @RestClient
     @Inject
-    ViaCEPClient client;
+    private ViaCEPClient client;
 
     @GET
     @Path("/{cep}")
     public Response obterCep(@PathParam String cep) {
-
         var response = this.client.obterCep(cep);
 
         return Response.ok(response).build();

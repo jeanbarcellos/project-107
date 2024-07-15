@@ -24,41 +24,38 @@ public class IBGELocalidadesResource {
 
     @RestClient
     @Inject
-    IBGELocalidadesClient client;
+    private IBGELocalidadesClient client;
 
     @GET
     @Path("/estados")
     public Response obterEstados() {
-        var result = this.client.obterEstados("nome");
+        var response = this.client.obterEstados("nome");
 
-        return Response.ok(result).build();
+        return Response.ok(response).build();
     }
 
     @GET
     @Path("/estados/{id}")
     public Response obterEstado(@PathParam String id) {
+        var response = this.client.obterEstado(id);
 
-        var result = this.client.obterEstado(id);
-
-        return Response.ok(result).build();
+        return Response.ok(response).build();
     }
 
     @GET
     @Path("/estados/{id}/municipios")
     public Response obterEstadoPorMunicipio(@PathParam String id) {
+        var response = this.client.obterMunicipiosPorEstadoId(id);
 
-        var result = this.client.obterMunicipiosPorEstadoId(id);
-
-        return Response.ok(result).build();
+        return Response.ok(response).build();
     }
 
     @GET
     @Path("/municipios/{id}")
     public Response obterMunicipio(@PathParam String id) {
+        var response = this.client.obterMunicipio(id);
 
-        var result = this.client.obterMunicipio(id);
-
-        return Response.ok(result).build();
+        return Response.ok(response).build();
     }
 
 }

@@ -23,7 +23,8 @@ public interface IBGELocalidadesClient {
 
     @GET
     @Path("/estados")
-    public List<UFResponse> obterEstados(@DefaultValue("nome") @QueryParam("orderBy") String orderBy);
+    public List<UFResponse> obterEstados(
+            @DefaultValue(UFResponse.LABEL_ID) @QueryParam("orderBy") String orderBy);
 
     @GET
     @Path("/estados/{id}")
@@ -35,7 +36,8 @@ public interface IBGELocalidadesClient {
 
     @GET
     @Path("/municipios")
-    public List<MunicipioResponse> obterMunicipios(@DefaultValue("if") @QueryParam("orderBy") String orderBy);
+    public List<MunicipioResponse> obterMunicipios(
+            @DefaultValue(MunicipioResponse.LABEL_ID) @QueryParam("orderBy") String orderBy);
 
     @GET
     @Path("/municipios/{id}")
