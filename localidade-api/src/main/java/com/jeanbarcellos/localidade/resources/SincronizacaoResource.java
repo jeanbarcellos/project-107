@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import com.jeanbarcellos.localidade.services.LocalidadeService;
+import com.jeanbarcellos.localidade.services.SincronizacaoService;
 
 @Path("/sincronizacao")
 @Tag(name = "Sincronização", description = "Sincronização da base local de localidades com o IBGE")
@@ -22,7 +22,7 @@ import com.jeanbarcellos.localidade.services.LocalidadeService;
 public class SincronizacaoResource {
 
     @Inject
-    LocalidadeService service;
+    SincronizacaoService service;
 
     @GET
     @Path("/estados")
