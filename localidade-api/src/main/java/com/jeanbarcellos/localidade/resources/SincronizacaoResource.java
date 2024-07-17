@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import com.jeanbarcellos.localidade.services.SincronizacaoService;
 
@@ -22,13 +23,21 @@ import com.jeanbarcellos.localidade.services.SincronizacaoService;
 public class SincronizacaoResource {
 
     @Inject
-    SincronizacaoService service;
+    protected SincronizacaoService service;
 
     @GET
     @Path("/estados")
     @Operation(summary = "Sincronizar estados com o IBGE", description = "Sincroniza a base local de estados com o IBGE")
     public Response sincronizarEstados() {
         this.service.sincronizarEstados();
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("/estados/{id}/municipios")
+    @Operation(summary = "Sincronizar municípios por estado com o IBGE", description = "Sincroniza a base local de municipios de um estado com o IBGE")
+    public Response sincronizarMunicipiosPorEstadoId(@PathParam String id) {
+        this.service.sincronizarMunicipiosPorEstadoId(id);
         return Response.ok().build();
     }
 
