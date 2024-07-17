@@ -9,15 +9,18 @@ import java.util.stream.Collectors;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import io.quarkus.panache.common.Sort;
 
+/**
+ * @see https://github.com/jeanbarcellos/java.quarkus.project-104/blob/master/src/main/java/com/jeanbarcellos/core/RepositoryBase.java
+ */
 public abstract class RepositoryBase<TEntity, TId>
         implements PanacheRepositoryBase<TEntity, TId> {
 
-    public boolean existsBy(String fieldName, Object value) {
-        return this.count(fieldName, value) > 0;
-    }
-
     public Long countBy(Map<String, Object> params) {
         return this.count(this.createQueryFromMap(params), params);
+    }
+
+    public boolean existsBy(String fieldName, Object value) {
+        return this.count(fieldName, value) > 0;
     }
 
     public List<TEntity> findBy(String fieldName, Object value) {
