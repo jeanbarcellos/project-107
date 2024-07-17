@@ -24,7 +24,7 @@ public class IBGELocalidadesResource {
 
     @RestClient
     @Inject
-    private IBGELocalidadesClient client;
+    protected IBGELocalidadesClient client;
 
     @GET
     @Path("/estados")

@@ -24,7 +24,7 @@ public class ViaCEPResource {
 
     @RestClient
     @Inject
-    private ViaCEPClient client;
+    protected ViaCEPClient client;
 
     @GET
     @Path("/{cep}")
