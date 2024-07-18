@@ -34,6 +34,7 @@ public class EnderecoResponse {
                 .municipio(MunicipioResponse.of(entity.getMunicipio()))
                 .bairro(entity.getBairro())
                 .logradouro(entity.getLogradouro())
+                .numero(entity.getNumero().toString())
                 .complemento(entity.getComplemento())
                 .build();
     }
