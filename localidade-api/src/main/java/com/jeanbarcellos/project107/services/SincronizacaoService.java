@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import com.jeanbarcellos.core.dto.SimpleResponse;
 import com.jeanbarcellos.project107.clients.ibge.IBGELocalidadesClient;
 import com.jeanbarcellos.project107.clients.ibge.dtos.MunicipioResponse;
 import com.jeanbarcellos.project107.clients.ibge.dtos.UFResponse;
@@ -40,7 +41,7 @@ public class SincronizacaoService {
     LocalidadeMapper localidadeMapper;
 
     @Transactional
-    public void sincronizarEstados() {
+    public SimpleResponse sincronizarEstados() {
         try {
             log.info("Sincronização dos Estados com o IBGE iniciada");
 
@@ -52,7 +53,11 @@ public class SincronizacaoService {
 
             this.estadoRepository.flush();
 
-            log.info("Sincronização dos Estados com o IBGE finalizada com sucesso");
+            var message = "Sincronização dos Estados com o IBGE finalizada com sucesso";
+
+            log.info(message);
+
+            return SimpleResponse.of(message);
         } catch (Exception e) {
             log.error("Sincronização dos Municipios com o IBGE interrompida por falha", e);
             throw e;
@@ -72,7 +77,7 @@ public class SincronizacaoService {
     }
 
     @Transactional
-    public void sincronizarMunicipios() {
+    public SimpleResponse sincronizarMunicipios() {
         try {
             log.info("Sincronização dos Municipios com o IBGE iniciada");
 
@@ -84,7 +89,11 @@ public class SincronizacaoService {
 
             this.municipioRepository.flush();
 
-            log.info("Sincronização dos Municipios com o IBGE finalizada com sucesso");
+            var message = "Sincronização dos Municipios com o IBGE finalizada com sucesso";
+
+            log.info(message);
+
+            return SimpleResponse.of(message);
         } catch (Exception e) {
             log.error("Sincronização dos Municipios com o IBGE interrompida por falha", e);
             throw e;
@@ -107,7 +116,7 @@ public class SincronizacaoService {
     }
 
     @Transactional
-    public void sincronizarMunicipiosPorEstadoId(String estadoId) {
+    public SimpleResponse sincronizarMunicipiosPorEstadoId(String estadoId) {
         try {
             log.info("Sincronização dos Municipios do estado '{}' com o IBGE iniciada", estadoId);
 
@@ -119,7 +128,11 @@ public class SincronizacaoService {
 
             this.municipioRepository.flush();
 
-            log.info("Sincronização dos Municipios estado '{}' com o IBGE finalizada com sucesso", estadoId);
+            var message = String.format("Sincronização dos Municipios estado '%s' com o IBGE finalizada com sucesso", estadoId);
+
+            log.info(message);
+
+            return SimpleResponse.of(message);
         } catch (Exception e) {
             log.error(String.format("Sincronização dos Municipios estado '%s' com o IBGE interrompida por falha",
                     estadoId), e);

@@ -29,24 +29,21 @@ public class SincronizacaoResource {
     @Path("/estados")
     @Operation(summary = "Sincronizar estados com o IBGE", description = "Sincroniza a base local de estados com o IBGE")
     public Response sincronizarEstados() {
-        this.service.sincronizarEstados();
-        return Response.ok().build();
+        return Response.ok(this.service.sincronizarEstados()).build();
     }
 
     @GET
     @Path("/estados/{id}/municipios")
     @Operation(summary = "Sincronizar municípios por estado com o IBGE", description = "Sincroniza a base local de municipios de um estado com o IBGE")
     public Response sincronizarMunicipiosPorEstadoId(@PathParam String id) {
-        this.service.sincronizarMunicipiosPorEstadoId(id);
-        return Response.ok().build();
+        return Response.ok(this.service.sincronizarMunicipiosPorEstadoId(id)).build();
     }
 
     @GET
     @Path("/municipios")
     @Operation(summary = "Sincronizar municípios com o IBGE", description = "Sincroniza a base local de municipios com o IBGE")
     public Response sincronizarMunicipios() {
-        this.service.sincronizarMunicipios();
-        return Response.ok().build();
+        return Response.ok(this.service.sincronizarMunicipios()).build();
     }
 
 }
