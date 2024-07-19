@@ -1,5 +1,6 @@
 package com.jeanbarcellos.project107.services;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -32,6 +33,14 @@ public class EnderecoService {
     @Inject
     MunicipioRepository municipioRepository;
 
+    @Inject
+    LocalidadeMapper localidadeMapper;
+
+    @PostConstruct
+    public void init() {
+        this.localidadeMapper.setMunicipioRepositoryFind(municipioId -> this.municipioRepository.findById(municipioId));
+    }
+
     @Transactional
     public void salvar(EnderecoRequest request) {
         validator.validarWithException(request);
@@ -41,8 +50,7 @@ public class EnderecoService {
             endereco = enderecoRepository.findByIdOptional(request.getId()).orElse(endereco);
         }
 
-        LocalidadeMapper.copyProperties(endereco, request,
-                municipioId -> this.municipioRepository.findById(municipioId));
+        this.localidadeMapper.copyProperties(endereco, request);
 
         log.info("Persistindo endereco {}", endereco);
 

@@ -36,6 +36,9 @@ public class SincronizacaoService {
     @Inject
     MunicipioRepository municipioRepository;
 
+    @Inject
+    LocalidadeMapper localidadeMapper;
+
     @Transactional
     public void sincronizarEstados() {
         try {
@@ -61,7 +64,7 @@ public class SincronizacaoService {
             return;
         }
 
-        var estado = LocalidadeMapper.toEstado(ufResponse);
+        var estado = this.localidadeMapper.toEstado(ufResponse);
 
         this.estadoRepository.persist(estado);
 
@@ -93,7 +96,7 @@ public class SincronizacaoService {
             return;
         }
 
-        var municipio = LocalidadeMapper.toMunicipio(municipioResponse);
+        var municipio = this.localidadeMapper.toMunicipio(municipioResponse);
 
         var estado = this.estadoRepository.getReference(Estado.class, municipioResponse.getUF().getId());
         municipio.setEstado(estado);
