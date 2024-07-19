@@ -17,10 +17,7 @@ import lombok.Setter;
 public class LocalidadeMapper {
 
     @Setter
-    private LongFunction<Municipio> municipioRepositoryFind;
-
-    private LocalidadeMapper() {
-    }
+    private LongFunction<Municipio> providerMunicipio;
 
     public Estado toEstado(UFResponse request) {
         return Estado.builder()
@@ -41,7 +38,7 @@ public class LocalidadeMapper {
         return endereco
                 .setId(request.getId())
                 .setCep(request.getCep())
-                .setMunicipio(this.municipioRepositoryFind.apply(request.getMunicipioId()))
+                .setMunicipio(this.providerMunicipio.apply(request.getMunicipioId()))
                 .setBairro(request.getBairro())
                 .setLogradouro(request.getLogradouro())
                 .setNumero(request.getNumero())

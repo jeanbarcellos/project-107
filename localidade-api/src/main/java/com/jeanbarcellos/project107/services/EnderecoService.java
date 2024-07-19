@@ -38,7 +38,7 @@ public class EnderecoService {
 
     @PostConstruct
     public void init() {
-        this.localidadeMapper.setMunicipioRepositoryFind(municipioId -> this.municipioRepository.findById(municipioId));
+        this.localidadeMapper.setProviderMunicipio(municipioId -> this.municipioRepository.findById(municipioId));
     }
 
     @Transactional
