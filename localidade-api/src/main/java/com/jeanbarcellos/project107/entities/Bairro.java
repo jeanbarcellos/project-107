@@ -34,8 +34,8 @@ public class Bairro {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name = "nome", nullable = false)
-    private String nome;
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "municipio_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "bairro_municipio_id_fk"), nullable = false)

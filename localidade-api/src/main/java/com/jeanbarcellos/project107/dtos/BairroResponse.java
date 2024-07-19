@@ -18,12 +18,12 @@ public class BairroResponse {
 
     private Long id;
 
-    private String nome;
+    private String descricao;
 
     public static BairroResponse of(Bairro entity) {
         return BairroResponse.builder()
                 .id(entity.getId())
-                .nome(entity.getNome())
+                .descricao(entity.getDescricao())
                 .build();
     }
 
