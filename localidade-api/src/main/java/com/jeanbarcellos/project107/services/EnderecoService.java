@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EnderecoService {
 
     public static final String MSG_ERROR_ENTITY_NOT_FOUND = "Endereço não encontrado para o ID '%s' informado.";
+    public static final String MSG_ERROR_ENTITY_NOT_FOUND_BY_ID = "%s não encontrado para o ID '%s' informado.";
 
     @Inject
     Validator validator;
@@ -38,7 +39,10 @@ public class EnderecoService {
 
     @PostConstruct
     public void init() {
-        this.localidadeMapper.setProviderMunicipio(municipioId -> this.municipioRepository.findById(municipioId));
+        this.localidadeMapper.setProviderMunicipio(
+                municipioId -> this.municipioRepository.findByIdOrThrow(municipioId,
+                        () -> new NotFoundException(
+                                String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Município", municipioId))));
     }
 
     @Transactional

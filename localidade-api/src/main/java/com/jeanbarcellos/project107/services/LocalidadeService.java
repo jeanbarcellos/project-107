@@ -54,7 +54,7 @@ public class LocalidadeService {
     }
 
     public EstadoResponse obterEstadoPorSigla(String sigla) {
-        var estado = this.estadoRepository.findFirstByOrTrhow("sigla", sigla.toUpperCase(),
+        var estado = this.estadoRepository.findFirstByOrThrow("sigla", sigla.toUpperCase(),
                 () -> new NotFoundException(MSG_ERROR_ENTITY_NOT_FOUND_BY_INITIALS));
 
         return EstadoResponse.of(estado);
