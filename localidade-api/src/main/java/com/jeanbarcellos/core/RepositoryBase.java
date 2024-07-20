@@ -15,6 +15,10 @@ import io.quarkus.panache.common.Sort;
 public abstract class RepositoryBase<TEntity, TId>
         implements PanacheRepositoryBase<TEntity, TId> {
 
+    protected static final String FIELD_ID = "id";
+    private static final String QUERY_PARAM_JOIN = "=:";
+    private static final String QUERY_AND_DELIMITER = " and ";
+
     public Long countBy(Map<String, Object> params) {
         return this.count(this.createQueryFromMap(params), params);
     }
@@ -62,7 +66,7 @@ public abstract class RepositoryBase<TEntity, TId>
         return entity == null ? Optional.empty() : Optional.of(entity);
     }
 
-    public <T extends Throwable> TEntity findFirstByOrTrhow(String fieldName, Object value,
+    public <T extends Throwable> TEntity findFirstByOrThrow(String fieldName, Object value,
             Supplier<? extends T> exceptionSupplier) throws T {
         return this.findFirstByAsOptional(fieldName, value).orElseThrow(exceptionSupplier);
     }
@@ -73,7 +77,8 @@ public abstract class RepositoryBase<TEntity, TId>
 
     protected String createQueryFromMap(Map<String, Object> map) {
         return map.entrySet().stream()
-                .map(entry -> entry.getKey() + "=:" + entry.getKey())
-                .collect(Collectors.joining(" and "));
+                .map(entry -> entry.getKey() + QUERY_PARAM_JOIN + entry.getKey())
+                .collect(Collectors.joining(QUERY_AND_DELIMITER));
     }
+
 }
