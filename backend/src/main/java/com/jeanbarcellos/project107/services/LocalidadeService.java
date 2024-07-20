@@ -27,6 +27,7 @@ public class LocalidadeService {
 
     private static final String FIELD_NOME = "nome";
     private static final String FIELD_ESTADO = "estado";
+    private static final String FIELD_SIGLA = "sigla";
 
     @Inject
     EstadoRepository estadoRepository;
@@ -54,7 +55,7 @@ public class LocalidadeService {
     }
 
     public EstadoResponse obterEstadoPorSigla(String sigla) {
-        var estado = this.estadoRepository.findFirstByOrThrow("sigla", sigla.toUpperCase(),
+        var estado = this.estadoRepository.findFirstByOrThrow(FIELD_SIGLA, sigla.toUpperCase(),
                 () -> new NotFoundException(MSG_ERROR_ENTITY_NOT_FOUND_BY_INITIALS));
 
         return EstadoResponse.of(estado);
@@ -79,7 +80,6 @@ public class LocalidadeService {
                 () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Município", id)));
 
         return MunicipioResponse.of(municipio);
-
     }
 
     // #endregion
@@ -101,7 +101,6 @@ public class LocalidadeService {
                 () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Bairro", id)));
 
         return BairroResponse.of(bairro);
-
     }
 
     // #endregion
@@ -124,7 +123,6 @@ public class LocalidadeService {
                 () -> new NotFoundException(String.format(MSG_ERROR_ENTITY_NOT_FOUND_BY_ID, "Logradouro", id)));
 
         return LogradouroResponse.of(logradouro);
-
     }
 
     // #endregion
