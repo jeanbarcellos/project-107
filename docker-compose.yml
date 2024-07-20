@@ -1,26 +1,32 @@
 version: "3.4"
 
 services:
-  localidade-db:
+  database:
+    container_name: project107_database
     image: postgres:14.5
-    container_name: localidade-db
     restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=localidade
     ports:
       - 8090:5432
     networks:
       - project107_net
+    volumes:
+      - project107_database_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=localidade
 
-  localidade-api:
-    image: project107/localidade-api
-    container_name: localidade-api
+  backend:
+    container_name: project107_backend
+    image: jeanbarcellos/project107_backend
     restart: always
     environment:
-      - DB_HOST=localidade-db
+      - DB_HOST=database
       - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=localidade
+      - LOG_SQL=false
     ports:
       - 8091:8080
     networks:
@@ -31,3 +37,8 @@ networks:
     name: project107_net
     driver: bridge
     external: false
+
+volumes:
+  project107_database_data:
+    name: project107_database_data
+    driver: local
