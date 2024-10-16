@@ -1,20 +1,27 @@
 version: "3.4"
 
 services:
-  localidade-db:
+  database:
     image: postgres:14.5
-    container_name: localidade-db
+    container_name: project107_database
     restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=localidade
     ports:
       - 8090:5432
     networks:
       - project107_net
+    volumes:
+      - project107_database_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=localidade
 
 networks:
   project107_net:
     name: project107_net
     driver: bridge
+
+volumes:
+  project107_database_data:
+    name: project107_database_data
+    driver: local
